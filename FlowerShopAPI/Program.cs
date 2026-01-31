@@ -1,3 +1,6 @@
+using FlowerShopAPI.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<FlowerShopContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("default")));
 
 var app = builder.Build();
 
